@@ -65,6 +65,79 @@ class TestDayRange < Minitest::Test
     assert_equal Date.new(2021, 1, 6), next_range.last
   end
 
+  def test_every_returns_an_array
+    day_range = DayRange.new(Date.new(2021, 1, 1), Date.new(2021, 1, 3))
+    assert_kind_of Array, day_range.every(days: 42)
+  end
+
+  def test_every_steps_through_days
+    dates = day_range.every(days: 1)
+
+    assert_equal [
+      Date.new(2021, 1, 1),
+      Date.new(2021, 1, 2),
+      Date.new(2021, 1, 3)
+    ], dates
+  end
+
+  def test_every_steps_through_every_other_day
+    dates = day_range.every(days: 2)
+
+    assert_equal [
+      Date.new(2021, 1, 1),
+      Date.new(2021, 1, 3)
+    ], dates
+  end
+
+  def test_every_steps_through_weeks
+    month = DayRange.new(Date.new(2022, 6, 1), Date.new(2022, 6, 30))
+    dates = month.every(weeks: 1)
+
+    assert_equal [
+      Date.new(2022, 6, 1),
+      Date.new(2022, 6, 8),
+      Date.new(2022, 6, 15),
+      Date.new(2022, 6, 22),
+      Date.new(2022, 6, 29)
+    ], dates
+  end
+
+  def test_every_steps_through_months
+    quarter = DayRange.new(Date.new(2021, 1, 1), Date.new(2021, 3, 31))
+    dates = quarter.every(months: 1)
+
+    assert_equal [
+      Date.new(2021, 1, 1),
+      Date.new(2021, 2, 1),
+      Date.new(2021, 3, 1)
+    ], dates
+  end
+
+  def test_every_steps_through_complex_steps
+    decade = DayRange.new(Date.new(2000, 1, 1), Date.new(2009, 12, 31))
+    dates = decade.every(days: 1, months: 2, years: 3)
+
+    assert_equal [
+      Date.new(2000, 1, 1),
+      Date.new(2003, 3, 2),
+      Date.new(2006, 5, 3),
+      Date.new(2009, 7, 4)
+    ], dates
+  end
+
+  def test_every_yields_each_date_to_a_block
+    dates = []
+    day_range.every(days: 1) do |date|
+      dates << date
+    end
+
+    assert_equal [
+      Date.new(2021, 1, 1),
+      Date.new(2021, 1, 2),
+      Date.new(2021, 1, 3)
+    ], dates
+  end
+
   private
 
   def day_range(first: Date.new(2021, 1, 1), last: Date.new(2021, 1, 3))
