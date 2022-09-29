@@ -9,4 +9,22 @@ class DayRange < Range
   def days
     last - first + 1
   end
+
+  # Returns a DayRange with the same length as this one, starting on the day
+  # after this one ends.
+  def next
+    self.class.new(
+      last.next_day,
+      last + days
+    )
+  end
+
+  # Returns a DayRange with the same length as this one, ending on the day
+  # before this one starts.
+  def previous
+    self.class.new(
+      first - days,
+      first.prev_day
+    )
+  end
 end
