@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-module DayRange
+class DayRange < Range
   VERSION = "0.1.0"
 end

@@ -2,7 +2,7 @@
 
 require_relative "day_range/version"
 
-module DayRange
+class DayRange < Range
   class Error < StandardError; end
   # Your code goes here...
 end
