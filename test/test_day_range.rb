@@ -39,6 +39,16 @@ class TestDayRange < Minitest::Test
     ], dates
   end
 
+  def test_it_includes_leap_day_in_array
+    dates = range_with_leap_day.to_a
+    assert_equal [
+      Date.new(2020, 2, 27),
+      Date.new(2020, 2, 28),
+      Date.new(2020, 2, 29),
+      Date.new(2020, 3, 1)
+    ], dates
+  end
+
   def test_days_returns_the_number_of_days_in_the_range
     assert_equal 3, day_range.days
   end
@@ -125,6 +135,59 @@ class TestDayRange < Minitest::Test
     ], dates
   end
 
+  def test_every_steps_over_leap_days
+    dates = range_with_leap_day.every(days: 1)
+
+    assert_equal [
+      Date.new(2020, 2, 27),
+      Date.new(2020, 2, 28),
+      Date.new(2020, 2, 29),
+      Date.new(2020, 3, 1)
+    ], dates
+  end
+
+  def test_every_steps_over_leap_days_in_month_steps
+    leap_year = DayRange.new(Date.new(2020, 1, 1), Date.new(2020, 12, 31))
+    dates = leap_year.every(months: 1)
+
+    assert_equal [
+      Date.new(2020, 1, 1),
+      Date.new(2020, 2, 1),
+      Date.new(2020, 3, 1),
+      Date.new(2020, 4, 1),
+      Date.new(2020, 5, 1),
+      Date.new(2020, 6, 1),
+      Date.new(2020, 7, 1),
+      Date.new(2020, 8, 1),
+      Date.new(2020, 9, 1),
+      Date.new(2020, 10, 1),
+      Date.new(2020, 11, 1),
+      Date.new(2020, 12, 1)
+    ], dates
+  end
+
+  def test_every_steps_on_leap_days
+    range_without_leap_day = DayRange.new(Date.new(2020, 1, 29), Date.new(2020, 3, 29))
+    dates = range_without_leap_day.every(months: 1)
+
+    assert_equal [
+      Date.new(2020, 1, 29),
+      Date.new(2020, 2, 29),
+      Date.new(2020, 3, 29)
+    ], dates
+  end
+
+  def test_every_steps_over_missing_days
+    range_without_leap_day = DayRange.new(Date.new(2021, 1, 29), Date.new(2021, 3, 29))
+    dates = range_without_leap_day.every(months: 1)
+
+    assert_equal [
+      Date.new(2021, 1, 29),
+      Date.new(2021, 2, 28),
+      Date.new(2021, 3, 28)
+    ], dates
+  end
+
   def test_every_yields_each_date_to_a_block
     dates = []
     day_range.every(days: 1) do |date|
@@ -142,5 +205,9 @@ class TestDayRange < Minitest::Test
 
   def day_range(first: Date.new(2021, 1, 1), last: Date.new(2021, 1, 3))
     DayRange.new(first, last)
+  end
+
+  def range_with_leap_day
+    DayRange.new(Date.new(2020, 2, 27), Date.new(2020, 3, 1))
   end
 end
