@@ -4,5 +4,9 @@ require_relative "day_range/version"
 
 class DayRange < Range
   class Error < StandardError; end
-  # Your code goes here...
+
+  # Returns the number of days in the timeframe.
+  def days
+    last - first + 1
+  end
 end

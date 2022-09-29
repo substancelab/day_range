@@ -43,4 +43,9 @@ class TestDayRange < Minitest::Test
       Date.new(2021, 1, 3)
     ], dates
   end
+
+  def test_days_returns_the_number_of_days_in_the_range
+    day_range = DayRange.new(Date.new(2021, 1, 1), Date.new(2021, 1, 3))
+    assert_equal 3, day_range.days
+  end
 end
