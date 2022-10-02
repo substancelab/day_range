@@ -1,8 +1,6 @@
 # DayRange
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/day_range`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+`DayRange` provides methods to navigate and manipulate series of dates.
 
 ## Installation
 
@@ -22,7 +20,19 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+year = DayRange.new(Date.new(2022, 1, 1), Date.new(2022, 12, 31))
+year.to_a.size
+# => 365
+last_year = year.previous.last.to_s
+# => "2021-12-31"
+year.each do |date|
+  # Every day of the year
+end
+year.every(weeks: 2) do |date|
+  # Every other week of the year
+end
+```
 
 ## Development
 
