@@ -34,6 +34,11 @@ year.every(weeks: 2) do |date|
 end
 ```
 
+## Related projects
+
+* https://github.com/moneybird/active-date-range
+* https://rubygems.org/gems/cada
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
