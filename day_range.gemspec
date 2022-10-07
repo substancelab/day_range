@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary = "Range-like object that knows about dates"
   spec.description = "DayRange provides methods to navigate and manipulate series of dates."
   spec.homepage = "https://github.com/substancelab/day_range"
-  spec.required_ruby_version = ">= 2.6.0"
+  spec.required_ruby_version = ">= 2.7.0"
 
   spec.license = "MIT"
 
