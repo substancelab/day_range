@@ -7,7 +7,7 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'day_range'
+gem 'dayrange'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install day_range
+    $ gem install dayrange
 
 ## Usage
 
@@ -53,4 +53,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/koppen/day_range.
+Bug reports and pull requests are welcome on GitHub at https://github.com/substancelab/dayrange.

@@ -3,7 +3,7 @@
 require_relative "lib/day_range/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "day_range"
+  spec.name = "dayrange"
   spec.version = DayRange::VERSION
   spec.authors = ["Jakob Skjerning"]
   spec.email = ["jakob@mentalized.net"]
