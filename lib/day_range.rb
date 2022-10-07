@@ -2,6 +2,7 @@
 
 require_relative "day_range/version"
 
+# A Range-like object that represents a range of days.
 class DayRange < Range
   class Error < StandardError; end
 
