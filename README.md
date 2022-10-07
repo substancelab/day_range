@@ -22,13 +22,19 @@ Or install it yourself as:
 
 ```ruby
 year = DayRange.new(Date.new(2022, 1, 1), Date.new(2022, 12, 31))
-year.to_a.size
-# => 365
-last_year = year.previous.last.to_s
-# => "2021-12-31"
+
+# Navigate to the period before
+last_year = year.previous
+
+# Navigate to the period after
+next_year = year.next
+
+# Iterate through the year
 year.each do |date|
   # Every day of the year
 end
+
+# Iterate in more interesting ways
 year.every(weeks: 2) do |date|
   # Every other week of the year
 end
