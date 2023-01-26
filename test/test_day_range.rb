@@ -80,6 +80,12 @@ class TestDayRange < Minitest::Test
     assert_kind_of Array, day_range.every(days: 42)
   end
 
+  def test_raises_an_error_if_given_an_unknown_internal
+    assert_raises(ArgumentError) {
+      day_range.every(day: 1)
+    }
+  end
+
   def test_every_steps_through_days
     dates = day_range.every(days: 1)
 
