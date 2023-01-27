@@ -6,6 +6,13 @@ require_relative "day_range/version"
 class DayRange < Range
   class Error < StandardError; end
 
+  VALID_STEPS = [
+    :days,
+    :months,
+    :weeks,
+    :years
+  ]
+
   # Returns the number of days in the timeframe.
   def days
     last - first + 1
@@ -24,6 +31,13 @@ class DayRange < Range
   #     day_range.every(days: 1, months: 2, years: 3)
   #
   def every(step)
+    unless step.keys.all? { |k| VALID_STEPS.include?(k) }
+      raise \
+        ArgumentError,
+        "step must one or more of #{VALID_STEPS.inspect}. " \
+        "Got #{step.keys.inspect}"
+    end
+
     c_date = first
     finish_date = last
     comparison_operator = exclude_end? ? :< : :<=
